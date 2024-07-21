@@ -1,3 +1,4 @@
+import { UserCredentials, UserState } from "./../../types/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
@@ -7,41 +8,51 @@ import {
   setAuthHeader,
 } from "../../config/guardApi";
 
+import { AxiosError } from "axios";
+
 export const registerThunk = createAsyncThunk(
   "register",
-  async (credentials, thunkApi) => {
+  async (credentials: UserCredentials, thunkApi) => {
     try {
       const { data } = await guardApi.post("/api/auth/sign-up", credentials);
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkApi.rejectWithValue(error.message);
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+      toast.error("Such a user exists");
     }
   }
 );
 
 export const loginThunk = createAsyncThunk(
   "login",
-  async (credentials, thunkApi) => {
+  async (credentials: Omit<UserCredentials, "username">, thunkApi) => {
     try {
-      const { data } = await guardApi.post("/api/auth/sign-in", credentials);
+      const { data } = await guardApi.post<UserState>(
+        "/api/auth/sign-in",
+        credentials
+      );
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkApi.rejectWithValue(error.message);
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error.message);
+      } else {
+        toast.error("Not a valid request");
+      }
     }
   }
 );
 
 export const logoutThunk = createAsyncThunk("logout", async (_, thunkApi) => {
-  const { auth } = thunkApi.getState();
-  if (!auth.token) {
+  const { token }: UserState = thunkApi.getState();
+  if (!token) {
     return thunkApi.rejectWithValue("Not found token");
   }
   try {
-    setAuthHeader(auth.token);
+    setAuthHeader(token);
     await guardApi.delete("/api/auth/sign-out");
     clearAuthHeader();
   } catch (error) {
