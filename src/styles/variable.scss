@@ -1,0 +1,24 @@
+:root {
+  --color-text: #fbfbfb;
+  --color-cancel: #623f8b;
+  --color-extend: #ff868d;
+  --color-income: #ffb627;
+  --background-btn: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+  --background-cancel: #fcfcfc;
+  --blur-background-modal: rgba(255, 255, 255, 0.1);
+
+  --background-main-category: #fed057;
+  --background-products-category: #ffd8d0;
+  --background-car-category: #fd9498;
+  --background-selfCare-category: #c5baff;
+  --background-childCare-category: #6e78e8;
+  --background-house-category: #4a56e2;
+  --background-education-category: #81e1ff;
+  --background-leisure-category: #24cca7;
+  --background-other-category: #00ad84;
+}

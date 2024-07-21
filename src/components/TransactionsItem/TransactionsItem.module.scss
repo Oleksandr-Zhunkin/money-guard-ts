@@ -1,0 +1,155 @@
+.btnBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.button {
+  width: 69px;
+  height: 29px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  opacity: 1;
+  border: 0;
+  cursor: pointer;
+  background: linear-gradient(
+    96.76deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
+  );
+  color: var(--color-text);
+  margin-left: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+}
+
+.type {
+  text-align: center;
+}
+
+.sum {
+  text-align: right;
+  font-weight: 600;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+  gap: 8px;
+}
+
+/* mobile styles */
+
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.082) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  border-left: 5px solid orange;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+}
+.cardRow:not(:last-child) {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.534);
+}
+
+.cardLabel {
+  font-weight: bold;
+}
+
+.cardValue {
+  text-align: right;
+}
+
+.cardSum {
+  text-align: right;
+  font-weight: 600;
+}
+
+.cardActions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardActions.edit {
+  margin: 0px;
+  padding: 0px;
+}
+
+.cardActions {
+  padding: 12px 20px;
+}
+
+.edit {
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.editContainer {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  padding: 4px 12px;
+}
+
+.income {
+  color: #ffb627;
+}
+
+.expense {
+  color: #ff868d;
+}
+
+.cardIncome {
+  border-left: 4px solid #ffb627;
+}
+
+.cardExpense {
+  border-left: 4px solid #ff868d;
+}
+.editImg {
+  display: block;
+  height: auto;
+}
+.gotoUpButton {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 11px;
+  cursor: pointer;
+  background: var(--background-btn);
+}

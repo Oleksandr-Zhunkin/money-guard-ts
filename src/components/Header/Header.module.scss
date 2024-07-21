@@ -1,0 +1,108 @@
+.header {
+  color: var(--color-text);
+  padding: 12px 0;
+  background: linear-gradient(276deg, #2e1746 3.19%, #2e225f 100%);
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media only screen and (min-width: 768px) {
+  .header {
+    padding: 16px 0;
+    z-index: 0;
+  }
+}
+
+.left_side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logo_icon {
+  width: 18px;
+  height: 18px;
+}
+@media only screen and (min-width: 768px) {
+  .logo_icon {
+    width: 25px;
+    height: 23px;
+  }
+}
+.logo_text {
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--color-text);
+}
+@media only screen and (min-width: 768px) {
+  .logo_text {
+    font-size: 17px;
+  }
+}
+.right_side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user {
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-right: 8px;
+}
+@media only screen and (min-width: 768px) {
+  .user {
+    font-size: 16px;
+    margin-right: 24px;
+  }
+}
+.exit_text {
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-right: 8px;
+}
+@media only screen and (min-width: 768px) {
+  .exit_text {
+    font-size: 16px;
+  }
+}
+
+.exit_btn {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .exit_btn {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .exit_btn::before {
+    content: "";
+    width: 2px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-right: 12px;
+    position: absolute;
+    left: -12px;
+  }
+}
+
+.exit_icon {
+  width: 18px;
+  height: 18px;
+}

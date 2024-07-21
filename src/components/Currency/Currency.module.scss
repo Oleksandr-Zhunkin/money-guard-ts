@@ -1,0 +1,112 @@
+.wrapper {
+  margin-top: 12px;
+  background-color: #4a57e217;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 8px 8px;
+}
+
+.headCurrency {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  background: #ffffff33;
+  display: flex;
+  padding: 13px 20px;
+  gap: 12px;
+  padding: 8px 20px 0px 20px;
+  justify-content: space-between;
+}
+
+.headCurrency p {
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  color: var(--color-text);
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.purchase {
+  margin-left: 26px;
+}
+
+.sale {
+  margin-left: 66px;
+}
+
+.valueContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.valueContainer p {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.valueWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 20px 0px 20px;
+}
+.image {
+  display: flex;
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .headCurrency {
+    padding: 12px 20px;
+  }
+
+  .wrapper {
+    margin: 0px;
+    width: 100%;
+    border-radius: 0px 0px 8px 8px;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .purchase {
+    margin-left: 34px;
+  }
+
+  .sale {
+    margin-left: 74px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .headCurrency {
+    padding: 16px 62px;
+  }
+
+  .purchase {
+    margin-left: 49px;
+  }
+
+  .sale {
+    margin-left: 50px;
+  }
+
+  .wrapper {
+    border-radius: 0px;
+    box-shadow: none;
+  }
+
+  .valueWrapper {
+    gap: 24px;
+    padding: 24px 131px 0px 85px;
+  }
+
+  .image {
+    width: 479px;
+  }
+}

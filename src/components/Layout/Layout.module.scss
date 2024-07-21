@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 1280px) {
+  .wrapper {
+    flex-direction: row;
+    gap: 69px;
+  }
+}

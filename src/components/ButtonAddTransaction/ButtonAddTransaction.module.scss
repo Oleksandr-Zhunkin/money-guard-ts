@@ -1,0 +1,21 @@
+.fixedButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  cursor: pointer;
+  background: var(--background-btn);
+}
+
+@media screen and (min-width: 768px) {
+  .fixedButton {
+    bottom: 40px;
+    right: 40px;
+  }
+}

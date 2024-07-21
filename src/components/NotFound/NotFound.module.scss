@@ -1,0 +1,36 @@
+.image {
+  width: 100%;
+  object-fit: contain;
+  height: 100vh;
+}
+.go_back {
+  position: fixed;
+  top: 20px;
+  left: 30px;
+  padding: 10px 25px 10px 35px;
+  border-radius: 20px;
+  font-size: 20px;
+  text-transform: uppercase;
+  opacity: 1;
+  border: 0;
+  cursor: pointer;
+  background: linear-gradient(
+    96.76deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
+  );
+  color: var(--color-text);
+  margin-left: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  position: absolute;
+  width: 30px;
+  height: 25px;
+  top: 5;
+  left: 0;
+}
