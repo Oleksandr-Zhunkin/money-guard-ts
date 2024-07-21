@@ -9,20 +9,28 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  WebStorage,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { monoReducer } from "./currency/slice";
 import { categoriesReducer } from "./categories/slice";
 import { transactionsReducer } from "./transactions/slice";
 
-const persistConfig = {
+interface Configure {
+  key: string[] | string;
+  version: number;
+  storage: WebStorage;
+  whitelist: string[];
+}
+
+const persistConfig: Configure = {
   key: "token",
   version: 1,
   storage,
   whitelist: ["token"],
 };
 
-const monoConfig = {
+const monoConfig: Configure = {
   key: ["data_mono", "mono"],
   version: 1,
   storage,
@@ -44,3 +52,5 @@ export const store = configureStore({
     }),
 });
 export const persistor = persistStore(store);
+
+export type RootState = ReturnType<typeof store.getState>;
