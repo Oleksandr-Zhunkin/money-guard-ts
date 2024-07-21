@@ -13,12 +13,16 @@ import Currency from "../Currency/Currency";
 
 import useResponse from "../../hooks/useResponse";
 
-const buildLinkClass = ({ isActive }) => {
+interface LinkClassProps {
+  isActive: boolean;
+}
+
+const buildLinkClass = ({ isActive }: LinkClassProps) => {
   return clsx(s.link, isActive && s.active);
 };
 
 const Navigation = () => {
-  const [isBalance, setIsBalance] = useState(false);
+  const [isBalance, setIsBalance] = useState<Boolean>(false);
   const { isMobile } = useResponse();
   const location = useLocation();
 
@@ -35,21 +39,21 @@ const Navigation = () => {
         <nav className={s.wrapper}>
           <NavLink to="/" className={buildLinkClass}>
             <div className={s.link_wrap}>
-              <HomeIcon title="Home" />
+              <HomeIcon />
               {!isMobile && <p className={s.text}>Home</p>}
             </div>
           </NavLink>
 
           <NavLink to="/statistics" className={buildLinkClass}>
             <div className={s.link_wrap}>
-              <IconStatistics title="Statistics" />
+              <IconStatistics />
               {!isMobile && <p className={s.text}>Statistics</p>}
             </div>
           </NavLink>
 
           {isMobile && (
             <NavLink to="/currency" className={buildLinkClass}>
-              <IconCurrency title="Currency" />
+              <IconCurrency />
             </NavLink>
           )}
         </nav>
