@@ -1,6 +1,7 @@
-import { Field, Form, Formik, ErrorMessage } from "formik";
+import { Field, FormikProps, Form, Formik, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import React from "react";
 
 import s from "./LoginPage.module.scss";
 import Logo from "../../images/icons/logo.svg";
@@ -11,17 +12,23 @@ import Email from "../../components/Icons/EmailIcon";
 import { loginThunk } from "../../redux/auth/operations";
 import { loginFormSchema } from "../../schemas/validatorLogin";
 
-const LoginPage = () => {
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+const LoginPage: React.FC = (FormikProps<LoginFormValues>) => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (dispatch: any, values: LoginFormValues) => {
     dispatch(loginThunk(values));
   };
 
-  const initialValues = {
+  const initialValues: LoginFormValues = {
     email: "",
     password: "",
   };
+
   return (
     <div className={s.main}>
       <div className={s.wrapper}>
@@ -42,7 +49,7 @@ const LoginPage = () => {
                   <div className={s.input_wrap}>
                     <label className={s.label}>
                       <div className={s.icon}>
-                        <Email />
+                        <Email  />
                       </div>
                     </label>
                     <div className={s.error_wrap}>
@@ -66,21 +73,20 @@ const LoginPage = () => {
                       <div className={s.icon}>
                         <Password />
                       </div>
-
-                      <div className={s.error_wrap}>
-                        <Field
-                          name="password"
-                          type="password"
-                          placeholder="Password"
-                          className={s.input}
-                        />
-                        <ErrorMessage
-                          className={s.error}
-                          name="password"
-                          component="Field"
-                        />
-                      </div>
                     </label>
+                    <div className={s.error_wrap}>
+                      <Field
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        className={s.input}
+                      />
+                      <ErrorMessage
+                        className={s.error}
+                        name="password"
+                        component="span"
+                      />
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -89,7 +95,6 @@ const LoginPage = () => {
                 <button type="submit" className={s.login_btn}>
                   LOG IN
                 </button>
-
                 <Link className={s.register_btn} to="/register">
                   REGISTER
                 </Link>
@@ -101,4 +106,5 @@ const LoginPage = () => {
     </div>
   );
 };
+
 export default LoginPage;
