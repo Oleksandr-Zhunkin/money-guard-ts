@@ -4,7 +4,7 @@ import css from "./IncomeTransaction.module.scss";
 
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 
-const AddTransactionForm = () => {
+const AddTransactionForm = ({}) => {
   return (
     <div className={css["inputs-container"]}>
       <div className={css["inline-container"]}>

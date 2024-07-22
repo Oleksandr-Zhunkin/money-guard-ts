@@ -3,6 +3,10 @@ import toast from "react-hot-toast";
 
 import { guardApi } from "../../config/guardApi";
 import { getBalanceThunk } from "../auth/operations";
+import {
+  onSubmitEditTransacrion,
+  TransactionType,
+} from "../../types/TransactionFormTypes";
 
 export const getTransactionsThunk = createAsyncThunk(
   "getTransaction",
@@ -10,7 +14,7 @@ export const getTransactionsThunk = createAsyncThunk(
     try {
       const { data } = await guardApi.get("/api/transactions");
       return data;
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
@@ -19,13 +23,13 @@ export const getTransactionsThunk = createAsyncThunk(
 
 export const addTransactionsThunk = createAsyncThunk(
   "addTransaction",
-  async (transaction, thunkApi) => {
+  async (transaction: TransactionType, thunkApi) => {
     try {
       const { data } = await guardApi.post("/api/transactions", transaction);
       thunkApi.dispatch(getBalanceThunk());
       toast.success(`Transaction: "${data.comment}" is added`);
       return data;
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
@@ -33,7 +37,7 @@ export const addTransactionsThunk = createAsyncThunk(
 );
 export const updateTransactionsThunk = createAsyncThunk(
   "currentTransaction",
-  async (transaction, thunkApi) => {
+  async (transaction: onSubmitEditTransacrion, thunkApi) => {
     try {
       const { data } = await guardApi.patch(
         `/api/transactions/${transaction.id}`,
@@ -41,7 +45,7 @@ export const updateTransactionsThunk = createAsyncThunk(
       );
       toast.success(`Transaction: "${data.comment}" is edited`);
       return data;
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
@@ -50,13 +54,13 @@ export const updateTransactionsThunk = createAsyncThunk(
 
 export const deleteTransactionsThunk = createAsyncThunk(
   "deleteTransaction",
-  async (id, thunkApi) => {
+  async (id: string, thunkApi) => {
     try {
       const { data } = await guardApi.delete(`/api/transactions/${id}`);
       thunkApi.dispatch(getBalanceThunk());
       toast.success(`Transaction is deleted`);
       return data.id;
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
@@ -71,7 +75,7 @@ export const fetchPeriodThunk = createAsyncThunk(
         `/api/transactions-summary?year=${year}&month=${month}`
       );
       return data;
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -84,7 +88,7 @@ export const fetchYearThunk = createAsyncThunk(
         `/api/transactions-summary?year=${year}`
       );
       return data;
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
