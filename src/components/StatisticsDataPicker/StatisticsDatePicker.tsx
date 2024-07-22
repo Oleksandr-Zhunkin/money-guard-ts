@@ -1,16 +1,31 @@
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect } from "react";
-import Select from "react-select";
+import Select, { StylesConfig } from "react-select";
 import { useDispatch } from "react-redux";
-
-import s from "./StatisticsDatePicker.module.scss";
-
 import {
   fetchPeriodThunk,
   fetchYearThunk,
 } from "../../redux/transactions/operations";
+import s from "./StatisticsDatePicker.module.scss";
 
-const customStyles = {
+
+interface OptionType {
+  value: number | null;
+  label: string;
+  isDisabled?: boolean;
+}
+
+
+interface StatisticDatePickerProps {
+  selectedYear: number | null;
+  setSelectedYear: (year: number | null) => void;
+  selectedMonth: number | null;
+  setSelectedMonth: (month: number | null) => void;
+  currentYear: number;
+}
+
+
+const customStyles: StylesConfig<OptionType> = {
   control: (provided) => ({
     ...provided,
     backgroundColor: "#4A56E21A",
@@ -44,17 +59,18 @@ const customStyles = {
   }),
 };
 
-const StatisticDatePicker = ({
+
+function StatisticDatePicker({
   selectedYear,
   setSelectedYear,
   selectedMonth,
   setSelectedMonth,
   currentYear,
-}) => {
+}: StatisticDatePickerProps) {
   const currentMonth = new Date().getMonth() + 1;
 
-  const generateMonthsOptions = (selectedYear) => {
-    const monthsOptions = Array.from({ length: 12 }, (e, i) => {
+  const generateMonthsOptions = (selectedYear: number | null): OptionType[] => {
+    const monthsOptions = Array.from({ length: 12 }, (_, i) => {
       const month = new Date(0, i).toLocaleString("en", { month: "long" });
       return {
         value: i + 1,
@@ -65,18 +81,36 @@ const StatisticDatePicker = ({
     monthsOptions.unshift({ value: null, label: "All months" });
     return monthsOptions;
   };
+
   const dispatch = useDispatch();
+
   const years = Array.from(
     { length: currentYear - 2020 + 1 },
     (_, i) => 2020 + i
   );
 
-  const yearOptions = years.map((year) => ({ value: year, label: year }));
+  const yearOptions: OptionType[] = years.map((year) => ({
+    value: year,
+    label: year.toString(),
+  }));
+
   useEffect(() => {
     const data = { year: selectedYear, month: selectedMonth };
     const dataYear = { year: selectedYear };
-    dispatch(selectedMonth ? fetchPeriodThunk(data) : fetchYearThunk(dataYear));
+    if (selectedMonth !== null) {
+      dispatch(fetchPeriodThunk(data));
+    } else {
+      dispatch(fetchYearThunk(dataYear));
+    }
   }, [selectedMonth, selectedYear, dispatch, currentYear]);
+
+  const handleMonthChange = (option: OptionType | null) => {
+    setSelectedMonth(option ? option.value : null);
+  };
+
+  const handleYearChange = (option: OptionType | null) => {
+    setSelectedYear(option ? option.value : null);
+  };
 
   return (
     <div className={s.monthYearPick_wrapper}>
@@ -84,20 +118,20 @@ const StatisticDatePicker = ({
         defaultValue={{ value: null, label: "All months" }}
         styles={customStyles}
         className={s.monthYearPick}
-        onChange={(option) => setSelectedMonth(option.value)}
+        onChange={handleMonthChange}
         options={generateMonthsOptions(selectedYear)}
         placeholder="Select month"
       />
       <Select
-        defaultValue={{ value: currentYear, label: currentYear }}
+        defaultValue={{ value: currentYear, label: currentYear.toString() }}
         styles={customStyles}
         className={s.monthYearPick}
-        onChange={(selectedOption) => setSelectedYear(selectedOption.value)}
+        onChange={handleYearChange}
         options={yearOptions}
         placeholder="Select year"
       />
     </div>
   );
-};
+}
 
 export default StatisticDatePicker;

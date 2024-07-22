@@ -1,41 +1,50 @@
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "redux";
 import IconEdit from "../Icons/IconEdit";
 import useResponse from "../../hooks/useResponse";
 import { selectCategories } from "../../redux/categories/selectors";
-import {
-  deleteTransactionsThunk,
-  getTransactionsThunk,
-} from "../../redux/transactions/operations";
+import { deleteTransactionsThunk } from "../../redux/transactions/operations";
 import { getBalanceThunk } from "../../redux/auth/operations";
 import s from "./TransactionsItem.module.scss";
 import IconArrowUp from "../Icons/IconArrowUp";
+import { TransactionType } from "../../types/TransactionFormTypes";
 
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
+interface Props {
+  transaction: TransactionType;
+  openModal: () => void;
+}
+
+const formatDate = (dateInput: Date | string): string => {
+  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+
+  if (isNaN(date.getTime())) {
+    return "Invalid date";
+  }
+
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = String(date.getFullYear()).slice(-2);
+
   return `${day}.${month}.${year}`;
 };
-
-const TransactionsItem = ({ transaction = {}, openModal }) => {
-  const dispatch = useDispatch();
-  const displayType = transaction.type === "INCOME" ? "+" : "-";
+function TransactionsItem({ transaction, openModal }: Props) {
+  const dispatch = useDispatch<Dispatch>();
   const { isMobile } = useResponse();
-
-  const handleDeleteTransaction = () => {
-    dispatch(deleteTransactionsThunk(transaction.id))
-      .unwrap()
-      .then(() => dispatch(getBalanceThunk()));
-  };
-
   const categories = useSelector(selectCategories);
   const category = categories.find(
     (item) => item.id === transaction.categoryId
   );
   const categoryName = category ? category.name : "Unknown";
   const displayAmount = Math.abs(transaction.amount);
+
+  const handleDeleteTransaction = () => {
+    if (transaction.id) {
+      dispatch(deleteTransactionsThunk(transaction.id))
+        .unwrap()
+        .then(() => dispatch(getBalanceThunk()));
+    }
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -44,7 +53,7 @@ const TransactionsItem = ({ transaction = {}, openModal }) => {
   const transactionRow = (
     <tr key={transaction.id}>
       <td>{formatDate(transaction.transactionDate)}</td>
-      <td className={s.type}>{displayType}</td>
+      <td className={s.type}>{transaction.type === "INCOME" ? "+" : "-"}</td>
       <td>{categoryName}</td>
       <td>{transaction.comment}</td>
       <td
@@ -63,12 +72,12 @@ const TransactionsItem = ({ transaction = {}, openModal }) => {
             onClick={openModal}
             aria-label="edit button"
           >
-            <IconEdit title="Edit" />
+            <IconEdit />
           </button>
           <button
             className={s.button}
             type="button"
-            onClick={() => handleDeleteTransaction()}
+            onClick={handleDeleteTransaction}
             aria-label="delete button"
           >
             Delete
@@ -94,7 +103,9 @@ const TransactionsItem = ({ transaction = {}, openModal }) => {
       </div>
       <div className={s.cardRow}>
         <span className={s.cardLabel}>Type</span>
-        <span className={s.cardValue}>{displayType}</span>
+        <span className={s.cardValue}>
+          {transaction.type === "INCOME" ? "+" : "-"}
+        </span>
       </div>
       <div className={s.cardRow}>
         <span className={s.cardLabel}>Category</span>
@@ -119,7 +130,7 @@ const TransactionsItem = ({ transaction = {}, openModal }) => {
         <button
           className={s.button}
           type="button"
-          onClick={() => handleDeleteTransaction()}
+          onClick={handleDeleteTransaction}
           aria-label="delete button"
         >
           Delete
@@ -146,6 +157,6 @@ const TransactionsItem = ({ transaction = {}, openModal }) => {
   );
 
   return isMobile ? transactionCard : transactionRow;
-};
+}
 
 export default TransactionsItem;
