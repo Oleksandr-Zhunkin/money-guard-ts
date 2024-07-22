@@ -7,20 +7,20 @@ import "./App.scss";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import HomePage from "./pages/HomePage/HomePage";
-import Statistics from "./pages/Statistics/Statistics.jsx";
-import CurrencyTab from "./pages/CurrencyTab/CurrencyTab.jsx";
+import Statistics from "./pages/Statistics/Statistics";
+import CurrencyTab from "./pages/CurrencyTab/CurrencyTab";
 
 import Section from "./components/Section/Section";
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import Loader from "./components/Loader/Loader";
-import NotFound from "./components/NotFound/NotFound.jsx";
+import NotFound from "./components/NotFound/NotFound";
 
 import { refreshThunk } from "./redux/auth/operations";
 import { selectIsRefresh } from "./redux/auth/selectors";
-import useResponse from "./hooks/useResponse.js";
-import { categoriesThunk } from "./redux/categories/operations.js";
+import useResponse from "./hooks/useResponse";
+import { categoriesThunk } from "./redux/categories/operations";
 
 function App() {
   const dispatch = useDispatch();
