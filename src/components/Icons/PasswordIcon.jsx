@@ -1,3 +1,5 @@
+// import React, { FC } from "react";
+
 const Password = () => {
   return (
     <svg
@@ -22,4 +24,5 @@ const Password = () => {
     </svg>
   );
 };
+
 export default Password;

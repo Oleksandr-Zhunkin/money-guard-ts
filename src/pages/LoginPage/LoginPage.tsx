@@ -1,4 +1,4 @@
-import { Field, FormikProps, Form, Formik, ErrorMessage } from "formik";
+import { Field, Form, Formik, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -11,16 +11,17 @@ import Email from "../../components/Icons/EmailIcon";
 
 import { loginThunk } from "../../redux/auth/operations";
 import { loginFormSchema } from "../../schemas/validatorLogin";
+import { useAppDispatch } from "../../hooks/useDispatch";
 
 interface LoginFormValues {
   email: string;
   password: string;
 }
 
-const LoginPage: React.FC = (FormikProps<LoginFormValues>) => {
-  const dispatch = useDispatch();
+const LoginPage: React.FC = () => {
+  const dispatch = useAppDispatch();
 
-  const handleSubmit = (dispatch: any, values: LoginFormValues) => {
+  const handleSubmit = (values: LoginFormValues) => {
     dispatch(loginThunk(values));
   };
 
@@ -49,7 +50,7 @@ const LoginPage: React.FC = (FormikProps<LoginFormValues>) => {
                   <div className={s.input_wrap}>
                     <label className={s.label}>
                       <div className={s.icon}>
-                        <Email  />
+                        <Email />
                       </div>
                     </label>
                     <div className={s.error_wrap}>
