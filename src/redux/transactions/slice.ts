@@ -7,8 +7,16 @@ import {
   getTransactionsThunk,
   updateTransactionsThunk,
 } from "./operations";
+import { TransactionType } from "../../types/TransactionFormTypes";
 
-const initialState = {
+export type StateType = {
+  transactions: TransactionType[];
+  periodTransaction: Date | null;
+  isError: Boolean;
+  isLoading: Boolean;
+};
+
+const initialState: StateType = {
   transactions: [],
   periodTransaction: null,
   isError: false,
@@ -18,6 +26,7 @@ const initialState = {
 const slice = createSlice({
   name: "transactions",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getTransactionsThunk.fulfilled, (state, action) => {
@@ -80,7 +89,7 @@ const slice = createSlice({
           fetchYearThunk.rejected
         ),
         (state, action) => {
-          state.isError = action.payload;
+          state.isError = action.payload as boolean;
           state.isLoading = false;
         }
       );
