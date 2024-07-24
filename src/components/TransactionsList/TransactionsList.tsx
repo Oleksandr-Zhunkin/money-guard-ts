@@ -1,27 +1,26 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
-
 import s from "./TransactionsList.module.scss";
-
 import ModalWindow from "../ModalWindow/ModalWindow";
 import EditTransactionForm from "../EditTransactionForm/EditTransactionForm";
 import TransactionsItem from "../TransactionsItem/TransactionsItem";
 import Loader from "../Loader/Loader";
-
 import {
   selectIsLoading,
   selectTransactions,
 } from "../../redux/transactions/selectors";
 import useResponse from "../../hooks/useResponse";
+import { TransactionType } from "../../types/TransactionFormTypes"; 
 
 const TransactionsList = () => {
-  const transactions = useSelector(selectTransactions);
+  const transactions = useSelector(selectTransactions) as TransactionType[]; 
   const isLoading = useSelector(selectIsLoading);
   const { isMobile } = useResponse();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<TransactionType | null>(null);
 
-  const openModal = (transaction) => {
+  const openModal = (transaction: TransactionType) => {
     setSelectedTransaction(transaction);
     setIsModalOpen(true);
   };
@@ -31,7 +30,7 @@ const TransactionsList = () => {
     setIsModalOpen(false);
   };
 
-  if (!transactions.length) {
+  if (transactions.length === 0) {
     return (
       <div className={s.filler}>
         <p>You don’t have any transactions now...</p>
@@ -40,7 +39,9 @@ const TransactionsList = () => {
   }
 
   const sortedTransactions = [...transactions].sort(
-    (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
+    (a, b) =>
+      new Date(b.transactionDate).getTime() -
+      new Date(a.transactionDate).getTime()
   );
 
   return isLoading ? (
@@ -65,7 +66,6 @@ const TransactionsList = () => {
                 key={transaction.id}
                 transaction={transaction}
                 openModal={() => openModal(transaction)}
-                index={index + 1}
               />
             ))}
           </tbody>
@@ -77,7 +77,6 @@ const TransactionsList = () => {
               key={transaction.id}
               transaction={transaction}
               openModal={() => openModal(transaction)}
-              index={index + 1}
             />
           ))}
         </ul>

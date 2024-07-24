@@ -12,8 +12,8 @@ import { TransactionType } from "../../types/TransactionFormTypes";
 export type StateType = {
   transactions: TransactionType[];
   periodTransaction: Date | null;
-  isError: Boolean;
-  isLoading: Boolean;
+  isError: boolean;
+  isLoading: boolean;
 };
 
 const initialState: StateType = {
@@ -89,10 +89,12 @@ const slice = createSlice({
           fetchYearThunk.rejected
         ),
         (state, action) => {
-          state.isError = action.payload as boolean;
+          state.isError = true;
           state.isLoading = false;
+          console.error("Error:", action.payload);
         }
       );
   },
 });
+
 export const transactionsReducer = slice.reducer;
