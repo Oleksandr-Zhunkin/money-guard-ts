@@ -46,6 +46,6 @@ export interface TransactionsState {
   isLoading: boolean;
 }
 export interface PeriodDate {
-  year: string | number;
-  month?: string;
+  year: string | number | Date;
+  month?: string | null;
 }

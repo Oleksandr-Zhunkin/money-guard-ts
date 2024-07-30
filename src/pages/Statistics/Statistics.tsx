@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { getYear } from "date-fns";
 import s from "./Statistics.module.scss";
 
@@ -9,10 +9,12 @@ import StatisticsTable from "../../components/StatisticsTable/StatisticsTable";
 import { useSelector } from "react-redux";
 import { selectPeriodTransaction } from "../../redux/transactions/selectors";
 
-const currentYear = getYear(new Date());
+const currentYear: Date | string | number = getYear(new Date());
 const Statistics = () => {
-  const [selectedYear, setSelectedYear] = useState(currentYear);
-  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedYear, setSelectedYear] = useState<Date | number | string>(
+    currentYear
+  );
+  const [selectedMonth, setSelectedMonth] = useState<null | string>(null);
   const period = useSelector(selectPeriodTransaction);
 
   return (
