@@ -7,10 +7,8 @@ export type TransactionType = {
   balanceAfter?: number;
   categoryId: string;
   userId?: string;
-  category: string;
-  sum: number;
 };
-export type Transaction = TransactionType;
+
 export type Category = {
   id: string;
   name: string;
