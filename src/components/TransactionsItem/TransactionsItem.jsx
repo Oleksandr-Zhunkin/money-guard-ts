@@ -6,7 +6,7 @@ import { selectCategories } from "../../redux/categories/selectors.ts";
 import { deleteTransactionsThunk } from "../../redux/transactions/operations";
 import { getBalanceThunk } from "../../redux/auth/operations.ts";
 import s from "./TransactionsItem.module.scss";
-import IconArrowUp from "../Icons/IconArrowUp.jsx";
+import IconArrowUp from "../Icons/IconArrowUp";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);

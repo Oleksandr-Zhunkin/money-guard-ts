@@ -7,8 +7,8 @@ import "./App.scss";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import HomePage from "./pages/HomePage/HomePage";
-import Statistics from "./pages/Statistics/Statistics.jsx";
-import CurrencyTab from "./pages/CurrencyTab/CurrencyTab.jsx";
+import Statistics from "./pages/Statistics/Statistics";
+import CurrencyTab from "./pages/CurrencyTab/CurrencyTab";
 
 import Section from "./components/Section/Section";
 import Layout from "./components/Layout/Layout";

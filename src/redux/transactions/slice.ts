@@ -9,6 +9,7 @@ import {
   getTransactionsThunk,
   updateTransactionsThunk,
 } from "./operations";
+import { TransactionType } from "../../types/TransactionFormTypes";
 
 const initialState: TransactionsState = {
   transactions: [],

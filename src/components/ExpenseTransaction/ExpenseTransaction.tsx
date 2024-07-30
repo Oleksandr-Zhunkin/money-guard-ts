@@ -1,9 +1,15 @@
 import { ErrorMessage, Field } from "formik";
+
 import css from "../IncomeTransaction/IncomeTransaction.module.scss";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import CustomSelect from "./CustomSelect";
+import { Category } from "../../types/TransactionFormTypes";
 
-const ExpenseTransaction = ({ categories, defaultValue }) => {
+type Prop = {
+  categories: Category[];
+};
+
+const ExpenseTransaction = ({ categories }: Prop) => {
   const expenseCategory = categories.filter((item) => item.name !== "Income");
 
   return (
@@ -13,7 +19,6 @@ const ExpenseTransaction = ({ categories, defaultValue }) => {
         name="categoryId"
         component={CustomSelect}
         options={expenseCategory}
-        defaultValue={defaultValue}
       />
       <ErrorMessage name="categoryId" component="div" className="error" />
       <div className={css["inline-container"]}>

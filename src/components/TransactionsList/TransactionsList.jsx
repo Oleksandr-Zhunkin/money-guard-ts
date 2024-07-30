@@ -6,7 +6,7 @@ import s from "./TransactionsList.module.scss";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import EditTransactionForm from "../EditTransactionForm/EditTransactionForm";
 import TransactionsItem from "../TransactionsItem/TransactionsItem";
-import Loader from "../Loader/Loader.jsx";
+import Loader from "../Loader/Loader";
 
 import {
   selectIsLoading,

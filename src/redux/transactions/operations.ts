@@ -58,7 +58,7 @@ export const updateTransactionsThunk = createAsyncThunk(
 
 export const deleteTransactionsThunk = createAsyncThunk(
   "deleteTransaction",
-  async (id, thunkApi) => {
+  async (id: string, thunkApi) => {
     try {
       const { data } = await guardApi.delete(`/api/transactions/${id}`);
       thunkApi.dispatch(getBalanceThunk());
