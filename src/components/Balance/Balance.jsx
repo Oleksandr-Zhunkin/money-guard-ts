@@ -3,10 +3,8 @@ import { selectUserBalance } from "../../redux/auth/selectors";
 
 import s from "./Balance.module.scss";
 
-type UserBalance = number | null;
-
 const Balance = () => {
-  const userBalance: UserBalance = useSelector(selectUserBalance);
+  const userBalance = useSelector(selectUserBalance);
 
   const formattedBalance = userBalance
     ?.toFixed(2)

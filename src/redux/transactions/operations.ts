@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-import { AxiosError } from "axios";
 import { guardApi } from "../../config/guardApi";
 import { getBalanceThunk } from "../auth/operations";
 import {
@@ -53,24 +52,20 @@ export const updateTransactionsThunk = createAsyncThunk(
   }
 );
 
-export const deleteTransactionsThunk = createAsyncThunk<
-  string,
-  string,
-  { rejectValue: string }
->("deleteTransaction", async (id, thunkApi) => {
-  try {
-    const { data } = await guardApi.delete<{ id: string }>(
-      `/api/transactions/${id}`
-    );
-    thunkApi.dispatch(getBalanceThunk());
-    toast.success(`Transaction is deleted`);
-    return data.id;
-  } catch (error) {
-    const err = error as AxiosError;
-    toast.error(err.message);
-    return thunkApi.rejectWithValue(err.message);
+export const deleteTransactionsThunk = createAsyncThunk(
+  "deleteTransaction",
+  async (id: string, thunkApi) => {
+    try {
+      const { data } = await guardApi.delete(`/api/transactions/${id}`);
+      thunkApi.dispatch(getBalanceThunk());
+      toast.success(`Transaction is deleted`);
+      return data.id;
+    } catch (error: any) {
+      toast.error(error.message);
+      return thunkApi.rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const fetchPeriodThunk = createAsyncThunk(
   "transactions/fetchPeriod",
