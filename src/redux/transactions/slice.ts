@@ -1,4 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+
+import { TransactionsState } from "../../types/types";
 import {
   addTransactionsThunk,
   deleteTransactionsThunk,
@@ -8,7 +10,7 @@ import {
   updateTransactionsThunk,
 } from "./operations";
 
-const initialState = {
+const initialState: TransactionsState = {
   transactions: [],
   periodTransaction: null,
   isError: false,
@@ -18,6 +20,7 @@ const initialState = {
 const slice = createSlice({
   name: "transactions",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getTransactionsThunk.fulfilled, (state, action) => {
@@ -80,7 +83,7 @@ const slice = createSlice({
           fetchYearThunk.rejected
         ),
         (state, action) => {
-          state.isError = action.payload;
+          state.isError = true;
           state.isLoading = false;
         }
       );

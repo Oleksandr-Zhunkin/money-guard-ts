@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/slice";
 import {
   persistStore,
@@ -17,7 +17,7 @@ import { categoriesReducer } from "./categories/slice";
 import { transactionsReducer } from "./transactions/slice";
 
 interface Configure {
-  key: string[] | string;
+  key: string;
   version: number;
   storage: WebStorage;
   whitelist: string[];
@@ -31,19 +31,19 @@ const persistConfig: Configure = {
 };
 
 const monoConfig: Configure = {
-  key: ["data_mono", "mono"],
+  key: "data_mono",
   version: 1,
   storage,
   whitelist: ["data_mono", "mono"],
 };
-
+const rootReducer = combineReducers({
+  auth: persistReducer(persistConfig, authReducer),
+  mono: persistReducer(monoConfig, monoReducer),
+  categories: categoriesReducer,
+  transactions: transactionsReducer,
+});
 export const store = configureStore({
-  reducer: {
-    auth: persistReducer(persistConfig, authReducer),
-    mono: persistReducer(monoConfig, monoReducer),
-    categories: categoriesReducer,
-    transactions: transactionsReducer,
-  },
+  reducer: { rootReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

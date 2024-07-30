@@ -11,7 +11,7 @@ import Loader from "../Loader/Loader.jsx";
 import {
   selectIsLoading,
   selectTransactions,
-} from "../../redux/transactions/selectors.js";
+} from "../../redux/transactions/selectors.ts";
 import useResponse from "../../hooks/useResponse.js";
 
 const TransactionsList = () => {

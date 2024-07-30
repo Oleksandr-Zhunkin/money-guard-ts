@@ -27,3 +27,34 @@ export interface MonoState {
   mono: object | string;
   data_mono: number | null;
 }
+
+export interface Transaction {
+  id?: string;
+  transactionDate: string;
+  type: "INCOME" | "EXPENSE";
+  comment: string;
+  amount: number;
+  balanceAfter?: number;
+  categoryId: string;
+  userId?: string;
+}
+export interface EditTransaction {
+  id: string;
+  data: {
+    transactionDate: string;
+    type: "INCOME" | "EXPENSE";
+    categoryId: string;
+    comment: string;
+    amount: number;
+  };
+}
+export interface TransactionsState {
+  transactions: Transaction[];
+  periodTransaction: null | Transaction[];
+  isError: boolean | string;
+  isLoading: boolean;
+}
+export interface PeriodDate {
+  year: string | number;
+  month?: string;
+}

@@ -1,5 +1,6 @@
 import { RootState } from "../store";
 
-export const selectMono = (state: RootState) => state.mono.mono;
+export const selectMono = (state: RootState) => state.rootReducer.mono.mono;
 
-export const selectData = (state: RootState) => state.mono.data_mono;
+export const selectData = (state: RootState) =>
+  state.rootReducer.mono.data_mono;
