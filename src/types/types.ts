@@ -7,17 +7,23 @@ export interface UserCredentials {
   email: string;
   password: string;
 }
+export interface User {
+  id?: string | null;
+  username: string | null;
+  email: string | null;
+  balance: number | null;
+}
+
 export interface UserState {
-  user: {
-    id: string;
-    username: string;
-    email: string;
-    balance: number;
-  };
+  user: User;
   token: string | null;
-  balance?: number;
+  balance?: number | null;
   isLoggedIn?: boolean;
   isLoading?: boolean;
   isRefresh?: boolean;
   isError?: boolean;
+}
+export interface MonoState {
+  mono: object | string;
+  data_mono: number | null;
 }

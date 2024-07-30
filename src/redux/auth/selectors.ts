@@ -1,5 +1,9 @@
-export const selectUser = (state) => state.auth.user;
-export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
-export const selectIsRefresh = (state) => state.auth.isRefresh;
-export const selectIsLoading = (state) => state.auth.isLoading;
-export const selectUserBalance = (state) => state.auth.user.balance;
+import { User } from "../../types/types";
+import { RootState } from "../store";
+
+export const selectUser = (state: RootState): User => state.auth.user;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectIsRefresh = (state: RootState): boolean | undefined =>
+  state.auth.isRefresh;
+export const selectIsLoading = (state: RootState) => state.auth.isLoading;
+export const selectUserBalance = (state: RootState) => state.auth.user.balance;

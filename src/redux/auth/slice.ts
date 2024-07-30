@@ -7,8 +7,9 @@ import {
   getBalanceThunk,
 } from "./operations";
 import { addTransactionsThunk } from "../transactions/operations";
+import { UserState } from "../../types/types";
 
-const initialState = {
+const initialState: UserState = {
   user: {
     username: null,
     email: null,
@@ -25,6 +26,7 @@ const initialState = {
 const slice = createSlice({
   name: "auth",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerThunk.fulfilled, (state, action) => {
