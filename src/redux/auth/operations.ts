@@ -75,6 +75,7 @@ export const refreshThunk = createAsyncThunk<User, void, { state: RootState }>(
     const {
       rootReducer: { auth },
     } = thunkApi.getState();
+
     if (!auth.token) {
       return thunkApi.rejectWithValue("Not found token");
     }

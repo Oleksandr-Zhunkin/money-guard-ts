@@ -30,7 +30,7 @@ export interface MonoState {
 
 export interface Transaction {
   id?: string;
-  transactionDate: string;
+  transactionDate: string | Date;
   type: "INCOME" | "EXPENSE";
   comment: string;
   amount: number;
