@@ -38,16 +38,7 @@ export interface Transaction {
   categoryId: string;
   userId?: string;
 }
-export interface EditTransaction {
-  id: string;
-  data: {
-    transactionDate: string;
-    type: "INCOME" | "EXPENSE";
-    categoryId: string;
-    comment: string;
-    amount: number;
-  };
-}
+
 export interface TransactionsState {
   transactions: Transaction[];
   periodTransaction: null | Transaction[];

@@ -4,7 +4,8 @@ import toast from "react-hot-toast";
 import { guardApi } from "../../config/guardApi";
 import { getBalanceThunk } from "../auth/operations";
 import { AxiosError } from "axios";
-import { EditTransaction, PeriodDate, Transaction } from "../../types/types";
+import { PeriodDate, Transaction } from "../../types/types";
+import { onSubmitEditTransacrion } from "../../types/TransactionFormTypes";
 
 export const getTransactionsThunk = createAsyncThunk(
   "getTransaction",
@@ -39,7 +40,7 @@ export const addTransactionsThunk = createAsyncThunk(
 );
 export const updateTransactionsThunk = createAsyncThunk(
   "currentTransaction",
-  async (transaction: EditTransaction, thunkApi) => {
+  async (transaction: onSubmitEditTransacrion, thunkApi) => {
     try {
       const { data } = await guardApi.patch(
         `/api/transactions/${transaction.id}`,
