@@ -10,7 +10,7 @@ import {
 } from "../../config/guardApi";
 
 import { AxiosError } from "axios";
-import { AppDispatch, RootState } from "../store";
+import { RootState } from "../store";
 
 export const registerThunk = createAsyncThunk(
   "register",
@@ -90,16 +90,29 @@ export const refreshThunk = createAsyncThunk<User, void, { state: RootState }>(
     }
   }
 );
-export const getBalanceThunk = createAsyncThunk(
-  "auth/getBalance",
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await guardApi.get("/api/users/current");
-      return data.balance;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return thunkAPI.rejectWithValue(error.message);
-      }
-    }
+interface GetBalanceResponse {
+  balance: number;
+}
+
+
+export const getBalanceThunk = createAsyncThunk<
+  number, 
+  void, 
+  {
+    rejectValue: string; 
   }
-);
+>("auth/getBalance", async (_, thunkAPI) => {
+  try {
+    const { data }: { data: GetBalanceResponse } = await guardApi.get(
+      "/api/users/current"
+    );
+    return data.balance;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkAPI.rejectWithValue(
+        error.message || "Failed to fetch balance"
+      );
+    }
+    return thunkAPI.rejectWithValue("An unexpected error occurred");
+  }
+});

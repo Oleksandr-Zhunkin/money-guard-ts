@@ -1,14 +1,20 @@
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import IconEdit from "../Icons/IconEdit";
-import useResponse from "../../hooks/useResponse.js";
-import { selectCategories } from "../../redux/categories/selectors.ts";
+import useResponse from "../../hooks/useResponse";
+import { selectCategories } from "../../redux/categories/selectors";
 import { deleteTransactionsThunk } from "../../redux/transactions/operations";
-import { getBalanceThunk } from "../../redux/auth/operations.ts";
+import { getBalanceThunk } from "../../redux/auth/operations";
 import s from "./TransactionsItem.module.scss";
 import IconArrowUp from "../Icons/IconArrowUp";
+import { Transaction } from "../../types/types"; // Ensure correct import path
+import { AppDispatch } from "../../redux/store";
+interface TransactionsItemProps {
+  transaction: Transaction;
+  openModal: (transaction: Transaction) => void;
+}
 
-const formatDate = (dateString) => {
+const formatDate = (dateString: string | Date) => {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -16,15 +22,20 @@ const formatDate = (dateString) => {
   return `${day}.${month}.${year}`;
 };
 
-const TransactionsItem = ({ transaction = {}, openModal }) => {
-  const dispatch = useDispatch();
+const TransactionsItem: React.FC<TransactionsItemProps> = ({
+  transaction,
+  openModal,
+}: TransactionsItemProps) => {
+  const dispatch: AppDispatch = useDispatch();
   const displayType = transaction.type === "INCOME" ? "+" : "-";
   const { isMobile } = useResponse();
 
   const handleDeleteTransaction = () => {
-    dispatch(deleteTransactionsThunk(transaction.id))
-      .unwrap()
-      .then(() => dispatch(getBalanceThunk()));
+    if (transaction.id) {
+      dispatch(deleteTransactionsThunk(transaction.id))
+        .unwrap()
+        .then(() => dispatch(getBalanceThunk()));
+    }
   };
 
   const categories = useSelector(selectCategories);
@@ -57,15 +68,15 @@ const TransactionsItem = ({ transaction = {}, openModal }) => {
           <button
             className={s.edit}
             type="button"
-            onClick={openModal}
+            onClick={() => openModal(transaction)}
             aria-label="edit button"
           >
-            <IconEdit title="Edit" />
+            <IconEdit />
           </button>
           <button
             className={s.button}
             type="button"
-            onClick={() => handleDeleteTransaction()}
+            onClick={handleDeleteTransaction}
             aria-label="delete button"
           >
             Delete
@@ -116,7 +127,7 @@ const TransactionsItem = ({ transaction = {}, openModal }) => {
         <button
           className={s.button}
           type="button"
-          onClick={() => handleDeleteTransaction()}
+          onClick={handleDeleteTransaction}
           aria-label="delete button"
         >
           Delete
@@ -124,7 +135,7 @@ const TransactionsItem = ({ transaction = {}, openModal }) => {
         <button
           className={s.editContainer}
           type="button"
-          onClick={openModal}
+          onClick={() => openModal(transaction)}
           aria-label="edit button"
         >
           <IconEdit />
