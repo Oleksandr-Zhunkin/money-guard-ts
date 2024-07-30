@@ -1,13 +1,10 @@
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import IconEdit from "../Icons/IconEdit";
-import useResponse from "../../hooks/useResponse";
-import { selectCategories } from "../../redux/categories/selectors";
-import {
-  deleteTransactionsThunk,
-  getTransactionsThunk,
-} from "../../redux/transactions/operations";
-import { getBalanceThunk } from "../../redux/auth/operations";
+import useResponse from "../../hooks/useResponse.js";
+import { selectCategories } from "../../redux/categories/selectors.ts";
+import { deleteTransactionsThunk } from "../../redux/transactions/operations";
+import { getBalanceThunk } from "../../redux/auth/operations.ts";
 import s from "./TransactionsItem.module.scss";
 import IconArrowUp from "../Icons/IconArrowUp";
 

@@ -1,4 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+
+import { TransactionsState } from "../../types/types";
 import {
   addTransactionsThunk,
   deleteTransactionsThunk,
@@ -9,14 +11,7 @@ import {
 } from "./operations";
 import { TransactionType } from "../../types/TransactionFormTypes";
 
-export type StateType = {
-  transactions: TransactionType[];
-  periodTransaction: Date | null;
-  isError: Boolean;
-  isLoading: Boolean;
-};
-
-const initialState: StateType = {
+const initialState: TransactionsState = {
   transactions: [],
   periodTransaction: null,
   isError: false,
@@ -89,7 +84,7 @@ const slice = createSlice({
           fetchYearThunk.rejected
         ),
         (state, action) => {
-          state.isError = action.payload as boolean;
+          state.isError = true;
           state.isLoading = false;
         }
       );

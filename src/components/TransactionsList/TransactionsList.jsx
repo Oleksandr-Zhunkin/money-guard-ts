@@ -11,8 +11,8 @@ import Loader from "../Loader/Loader";
 import {
   selectIsLoading,
   selectTransactions,
-} from "../../redux/transactions/selectors";
-import useResponse from "../../hooks/useResponse";
+} from "../../redux/transactions/selectors.ts";
+import useResponse from "../../hooks/useResponse.js";
 
 const TransactionsList = () => {
   const transactions = useSelector(selectTransactions);

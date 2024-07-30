@@ -48,7 +48,9 @@ export const loginThunk = createAsyncThunk(
 export const logoutThunk = createAsyncThunk<void, void, { state: RootState }>(
   "logout",
   async (_, thunkApi) => {
-    const { auth } = thunkApi.getState();
+    const {
+      rootReducer: { auth },
+    } = thunkApi.getState();
 
     if (!auth.token) {
       return thunkApi.rejectWithValue("Not found token");
@@ -70,7 +72,9 @@ export const logoutThunk = createAsyncThunk<void, void, { state: RootState }>(
 export const refreshThunk = createAsyncThunk<User, void, { state: RootState }>(
   "refresh",
   async (_, thunkApi) => {
-    const { auth } = thunkApi.getState();
+    const {
+      rootReducer: { auth },
+    } = thunkApi.getState();
     if (!auth.token) {
       return thunkApi.rejectWithValue("Not found token");
     }

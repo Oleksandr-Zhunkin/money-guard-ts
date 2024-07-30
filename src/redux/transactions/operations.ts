@@ -3,10 +3,8 @@ import toast from "react-hot-toast";
 
 import { guardApi } from "../../config/guardApi";
 import { getBalanceThunk } from "../auth/operations";
-import {
-  onSubmitEditTransacrion,
-  TransactionType,
-} from "../../types/TransactionFormTypes";
+import { AxiosError } from "axios";
+import { EditTransaction, PeriodDate, Transaction } from "../../types/types";
 
 export const getTransactionsThunk = createAsyncThunk(
   "getTransaction",
@@ -14,30 +12,34 @@ export const getTransactionsThunk = createAsyncThunk(
     try {
       const { data } = await guardApi.get("/api/transactions");
       return data;
-    } catch (error: any) {
-      toast.error(error.message);
-      return thunkApi.rejectWithValue(error.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+      toast.error("Failed request");
     }
   }
 );
 
 export const addTransactionsThunk = createAsyncThunk(
   "addTransaction",
-  async (transaction: TransactionType, thunkApi) => {
+  async (transaction: Transaction, thunkApi) => {
     try {
       const { data } = await guardApi.post("/api/transactions", transaction);
       thunkApi.dispatch(getBalanceThunk());
       toast.success(`Transaction: "${data.comment}" is added`);
       return data;
-    } catch (error: any) {
-      toast.error(error.message);
-      return thunkApi.rejectWithValue(error.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+      toast.error("Incorrect data");
     }
   }
 );
 export const updateTransactionsThunk = createAsyncThunk(
   "currentTransaction",
-  async (transaction: onSubmitEditTransacrion, thunkApi) => {
+  async (transaction: EditTransaction, thunkApi) => {
     try {
       const { data } = await guardApi.patch(
         `/api/transactions/${transaction.id}`,
@@ -45,9 +47,11 @@ export const updateTransactionsThunk = createAsyncThunk(
       );
       toast.success(`Transaction: "${data.comment}" is edited`);
       return data;
-    } catch (error: any) {
-      toast.error(error.message);
-      return thunkApi.rejectWithValue(error.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+      toast.error("Incorrect data");
     }
   }
 );
@@ -60,36 +64,42 @@ export const deleteTransactionsThunk = createAsyncThunk(
       thunkApi.dispatch(getBalanceThunk());
       toast.success(`Transaction is deleted`);
       return data.id;
-    } catch (error: any) {
-      toast.error(error.message);
-      return thunkApi.rejectWithValue(error.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+      toast.error("Incorrect data");
     }
   }
 );
 
 export const fetchPeriodThunk = createAsyncThunk(
   "transactions/fetchPeriod",
-  async ({ year, month }, thunkAPI) => {
+  async ({ year, month }: PeriodDate, thunkApi) => {
     try {
       const { data } = await guardApi.get(
         `/api/transactions-summary?year=${year}&month=${month}`
       );
       return data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error.message);
+      }
     }
   }
 );
 export const fetchYearThunk = createAsyncThunk(
   "transactions/fetchYear",
-  async ({ year }, thunkAPI) => {
+  async ({ year }: PeriodDate, thunkApi) => {
     try {
       const { data } = await guardApi.get(
         `/api/transactions-summary?year=${year}`
       );
       return data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error.message);
+      }
     }
   }
 );
