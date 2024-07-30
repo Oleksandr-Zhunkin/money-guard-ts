@@ -58,3 +58,17 @@ export interface PeriodDate {
   year: string | number;
   month?: string;
 }
+
+interface Category {
+  name: string;
+  total: number;
+  type: "EXPENSE" | "INCOME";
+}
+
+export interface StatisticsTableProps {
+  category?: {
+    categoriesSummary: Category[];
+    expenseSummary: number;
+    incomeSummary: number;
+  };
+}

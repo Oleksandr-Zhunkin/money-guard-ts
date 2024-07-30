@@ -5,10 +5,11 @@ import s from "./StatisticDashboard.module.scss";
 
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
+import { StatisticsTableProps } from "../../types/types";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const StatisticDashboard = ({ category }) => {
+const StatisticDashboard: React.FC<StatisticsTableProps> = ({ category }) => {
   const userBalance = useSelector(selectUser);
 
   const summary = category?.categoriesSummary
