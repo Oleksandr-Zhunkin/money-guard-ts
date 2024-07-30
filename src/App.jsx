@@ -15,12 +15,12 @@ import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import Loader from "./components/Loader/Loader";
-import NotFound from "./components/NotFound/NotFound.jsx";
+import NotFound from "./components/NotFound/NotFound.tsx";
 
 import { refreshThunk } from "./redux/auth/operations";
 import { selectIsRefresh } from "./redux/auth/selectors";
 import useResponse from "./hooks/useResponse.js";
-import { categoriesThunk } from "./redux/categories/operations.js";
+import { categoriesThunk } from "./redux/categories/operations.ts";
 
 function App() {
   const dispatch = useDispatch();
