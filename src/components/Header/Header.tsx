@@ -19,10 +19,10 @@ const Header = () => {
   const { isTablet } = useResponse();
   const [modalIsOpen, setModalIsOpen] = useState<Boolean>(false);
 
-  const handleModalOpen = (data: boolean): void => {
+  const handleModalOpen = (): void => {
     setModalIsOpen(true);
   };
-  const handleModalClose = (data: boolean): void => {
+  const handleModalClose = (): void => {
     setModalIsOpen(false);
   };
 
@@ -40,7 +40,7 @@ const Header = () => {
               <div className={s.right_side}>
                 <p className={s.user}>{user.username}</p>
                 <button
-                  onClick={(e: React.MouseEvent) => handleModalOpen}
+                  onClick={(e: React.MouseEvent) => handleModalOpen()}
                   className={s.exit_btn}
                   type="button"
                 >
