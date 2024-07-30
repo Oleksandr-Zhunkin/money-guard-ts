@@ -10,6 +10,12 @@ import ExpenseTransaction from "../ExpenseTransaction/ExpenseTransaction";
 import { addTransactionsThunk } from "../../redux/transactions/operations";
 import { categoriesThunk } from "../../redux/categories/operations";
 import { selectCategories } from "../../redux/categories/selectors";
+import {
+  Category,
+  onSubmitValuesProps,
+  TransactionType,
+} from "../../types/TransactionFormTypes";
+import { AppDispatch } from "../../redux/store";
 
 let formSchema = Yup.object({
   sum: Yup.number().min(1).required(),
@@ -23,21 +29,25 @@ let formSchema = Yup.object({
     .required(),
 });
 
-const AddTransactionForm = ({ onClose }) => {
-  const categories = useSelector(selectCategories);
+type Prop = {
+  onClose: () => void;
+};
+
+const AddTransactionForm = ({ onClose }: Prop) => {
+  const categories: Category[] = useSelector(selectCategories);
   const [isExpense, setIsIncome] = useState(true);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(categoriesThunk());
   }, [dispatch]);
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (values: onSubmitValuesProps, actions: any) => {
     const category = isExpense
       ? "063f1132-ba5d-42b4-951d-44011ca46262"
       : values.categoryId.value;
 
-    const data = {
+    const data: TransactionType = {
       transactionDate: values.datepicker,
       type: isExpense ? "INCOME" : "EXPENSE",
       categoryId: category,
@@ -51,7 +61,7 @@ const AddTransactionForm = ({ onClose }) => {
         onClose();
         actions.resetForm();
       })
-      .catch((error) => {
+      .catch((error: string) => {
         console.error("Error adding transaction:", error);
       });
   };
@@ -63,19 +73,21 @@ const AddTransactionForm = ({ onClose }) => {
   if (!categories.length) {
     return <div>Loading categories...</div>;
   }
+  const initialValues: onSubmitValuesProps = {
+    type: "INCOME",
+    categoryId: {
+      value: "c9d9e447-1b83-4238-8712-edc77b18b739",
+      label: "Main expenses",
+    },
+    incomeExpense: !isExpense,
+    sum: 0,
+    datepicker: new Date(),
+    comment: "",
+  };
 
   return (
     <Formik
-      initialValues={{
-        categoryId: {
-          value: "c9d9e447-1b83-4238-8712-edc77b18b739",
-          label: "Main expenses",
-        },
-        incomeExpense: !isExpense,
-        sum: "",
-        datepicker: new Date(),
-        comment: "",
-      }}
+      initialValues={initialValues}
       onSubmit={handleSubmit}
       validationSchema={formSchema}
     >
