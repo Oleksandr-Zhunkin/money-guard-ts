@@ -1,6 +1,22 @@
 import s from "./StatisticsTable.module.scss";
 
-export const StatisticsTable = ({ category }) => {
+interface Category {
+  name: string;
+  total: number;
+  type: "EXPENSE" | "INCOME";
+}
+
+interface StatisticsTableProps {
+  category?: {
+    categoriesSummary: Category[];
+    expenseSummary: number;
+    incomeSummary: number;
+  };
+}
+
+export const StatisticsTable: React.FC<StatisticsTableProps> = ({
+  category,
+}) => {
   const color = [
     "#81e1ff",
     "#4a56e2",
