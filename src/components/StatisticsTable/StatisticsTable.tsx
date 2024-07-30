@@ -1,18 +1,5 @@
+import { StatisticsTableProps } from "../../types/types";
 import s from "./StatisticsTable.module.scss";
-
-interface Category {
-  name: string;
-  total: number;
-  type: "EXPENSE" | "INCOME";
-}
-
-interface StatisticsTableProps {
-  category?: {
-    categoriesSummary: Category[];
-    expenseSummary: number;
-    incomeSummary: number;
-  };
-}
 
 export const StatisticsTable: React.FC<StatisticsTableProps> = ({
   category,
