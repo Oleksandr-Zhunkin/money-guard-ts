@@ -1,3 +1,4 @@
+import { StatisticsTableProps } from "../../types/types";
 import { RootState } from "../store";
 
 export const selectTransactions = (state: RootState) =>
