@@ -44,10 +44,10 @@ const slice = createSlice({
         state.isError = false;
       })
       .addCase(getBalanceThunk.fulfilled, (state, action) => {
-        state.user.balance = action.payload ?? null; // Default to null if undefined
+        state.user.balance = action.payload ?? null;
       })
       .addCase(addTransactionsThunk.fulfilled, (state, action) => {
-        state.user.balance = action.payload.balanceAfter ?? null; // Default to null if undefined
+        state.user.balance = action.payload.balanceAfter ?? null;
       })
       .addCase(refreshThunk.fulfilled, (state, action) => {
         state.user = action.payload;

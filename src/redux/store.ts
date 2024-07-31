@@ -43,7 +43,7 @@ const rootReducer = combineReducers({
   transactions: transactionsReducer,
 });
 export const store = configureStore({
-  reducer: { rootReducer },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

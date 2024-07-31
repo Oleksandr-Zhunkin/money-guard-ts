@@ -10,10 +10,11 @@ import s from "./HomePage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getTransactionsThunk } from "../../redux/transactions/operations";
 import { selectIsLoading } from "../../redux/transactions/selectors";
+import { AppDispatch } from "../../redux/store";
 
 export default function HomePage() {
   const isLoading = useSelector(selectIsLoading);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [isModalOpen, setModalOpen] = useState(false);
   const toggleModal = () => {
     setModalOpen(!isModalOpen);

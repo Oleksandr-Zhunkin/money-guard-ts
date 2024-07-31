@@ -1,5 +1,4 @@
-import { object } from "prop-types";
-import { User, UserCredentials, UserState } from "./../../types/types";
+import { User, UserCredentials } from "./../../types/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
@@ -48,9 +47,7 @@ export const loginThunk = createAsyncThunk(
 export const logoutThunk = createAsyncThunk<void, void, { state: RootState }>(
   "logout",
   async (_, thunkApi) => {
-    const {
-      rootReducer: { auth },
-    } = thunkApi.getState();
+    const { auth } = thunkApi.getState();
 
     if (!auth.token) {
       return thunkApi.rejectWithValue("Not found token");
@@ -72,9 +69,7 @@ export const logoutThunk = createAsyncThunk<void, void, { state: RootState }>(
 export const refreshThunk = createAsyncThunk<User, void, { state: RootState }>(
   "refresh",
   async (_, thunkApi) => {
-    const {
-      rootReducer: { auth },
-    } = thunkApi.getState();
+    const { auth } = thunkApi.getState();
 
     if (!auth.token) {
       return thunkApi.rejectWithValue("Not found token");
@@ -94,12 +89,11 @@ interface GetBalanceResponse {
   balance: number;
 }
 
-
 export const getBalanceThunk = createAsyncThunk<
-  number, 
-  void, 
+  number,
+  void,
   {
-    rejectValue: string; 
+    rejectValue: string;
   }
 >("auth/getBalance", async (_, thunkAPI) => {
   try {
