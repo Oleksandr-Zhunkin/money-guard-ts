@@ -26,7 +26,7 @@ export interface UserState {
 
 export type Transaction = {
   id?: string;
-  transactionDate: Date; // Consistent use of Date type
+  transactionDate: Date;
   type: "EXPENSE" | "INCOME";
   comment: string;
   amount: number;
@@ -77,6 +77,6 @@ export interface CurrencyData {
 }
 
 export interface MonoState {
-  mono: CurrencyData[]; // Ensure this matches the expected type
+  mono: CurrencyData[];
   data_mono: number | null;
 }
