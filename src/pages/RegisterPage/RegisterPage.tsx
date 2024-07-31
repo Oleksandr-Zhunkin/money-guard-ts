@@ -13,11 +13,13 @@ import Password from "../../components/Icons/PasswordIcon";
 import { registerThunk } from "../../redux/auth/operations";
 import { registerFormSchema } from "../../schemas/validatorLogin";
 import { useState } from "react";
+import { UserCredentials } from "../../types/types";
+import { AppDispatch } from "../../redux/store";
 
 const RegisterPage = () => {
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const handleSubmit = (values) => {
+  const [password, setPassword] = useState<string>("");
+  const dispatch: AppDispatch = useDispatch();
+  const handleSubmit = (values: UserCredentials) => {
     const credentials = {
       username: values.username,
       email: values.email,
@@ -105,11 +107,12 @@ const RegisterPage = () => {
                             type="password"
                             placeholder="Password"
                             className={s.input}
-                            onChange={(e) => {
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) => {
                               handleChange(e);
                               setPassword(e.target.value);
                             }}
-                            // onBlur={handleBlur}
                           />
                           <ErrorMessage
                             className={s.error}

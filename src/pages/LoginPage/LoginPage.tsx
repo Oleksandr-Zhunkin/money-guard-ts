@@ -10,11 +10,13 @@ import Email from "../../components/Icons/EmailIcon";
 
 import { loginThunk } from "../../redux/auth/operations";
 import { loginFormSchema } from "../../schemas/validatorLogin";
+import { AppDispatch } from "../../redux/store";
+import { UserCredentials } from "../../types/types";
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: Omit<UserCredentials, "username">) => {
     dispatch(loginThunk(values));
   };
 
