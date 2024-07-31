@@ -4,7 +4,7 @@ export const guardApi = axios.create({
   baseURL: "https://wallet.b.goit.study",
 });
 
-export const setAuthHeader = (token) => {
+export const setAuthHeader = (token: string) => {
   guardApi.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 export const clearAuthHeader = () => {

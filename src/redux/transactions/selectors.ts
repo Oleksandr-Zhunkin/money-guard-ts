@@ -1,10 +1,9 @@
 import { RootState } from "../store";
 
 export const selectTransactions = (state: RootState) =>
-  state.rootReducer.transactions.transactions;
+  state.transactions.transactions;
 export const selectIsLoading = (state: RootState) =>
-  state.rootReducer.transactions.isLoading;
-export const selectIsError = (state: RootState) =>
-  state.rootReducer.transactions.isError;
+  state.transactions.isLoading;
+export const selectIsError = (state: RootState) => state.transactions.isError;
 export const selectPeriodTransaction = (state: RootState) =>
-  state.rootReducer.transactions.periodTransaction;
+  state.transactions.periodTransaction;

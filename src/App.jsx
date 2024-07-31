@@ -19,7 +19,7 @@ import NotFound from "./components/NotFound/NotFound.tsx";
 
 import { refreshThunk } from "./redux/auth/operations";
 import { selectIsRefresh } from "./redux/auth/selectors";
-import useResponse from "./hooks/useResponse.js";
+import useResponse from "./hooks/useResponse.ts";
 import { categoriesThunk } from "./redux/categories/operations.ts";
 
 function App() {
