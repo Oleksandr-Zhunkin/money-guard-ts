@@ -15,15 +15,16 @@ import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import Loader from "./components/Loader/Loader";
-import NotFound from "./components/NotFound/NotFound.tsx";
+import NotFound from "./components/NotFound/NotFound";
 
 import { refreshThunk } from "./redux/auth/operations";
 import { selectIsRefresh } from "./redux/auth/selectors";
-import useResponse from "./hooks/useResponse.ts";
-import { categoriesThunk } from "./redux/categories/operations.ts";
+import useResponse from "./hooks/useResponse";
+import { categoriesThunk } from "./redux/categories/operations";
+import { AppDispatch } from "./redux/store";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefresh);
   const { isMobile } = useResponse();
 
