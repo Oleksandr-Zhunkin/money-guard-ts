@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, Form, Formik, ErrorMessage } from "formik";
@@ -12,14 +13,16 @@ import Password from "../../components/Icons/PasswordIcon";
 
 import { registerThunk } from "../../redux/auth/operations";
 import { registerFormSchema } from "../../schemas/validatorLogin";
-import { useState } from "react";
+
 import { UserCredentials } from "../../types/types";
 import { AppDispatch } from "../../redux/store";
 
-const RegisterPage = () => {
+const RegisterPage: React.FC = () => {
   const [password, setPassword] = useState<string>("");
+
   const dispatch: AppDispatch = useDispatch();
-  const handleSubmit = (values: UserCredentials) => {
+
+  const handleSubmit = (values: Omit<UserCredentials, "confirmPassword">) => {
     const credentials = {
       username: values.username,
       email: values.email,
@@ -34,6 +37,7 @@ const RegisterPage = () => {
     password: "",
     confirmPassword: "",
   };
+
   return (
     <div className={s.main}>
       <div className={s.wrapper}>

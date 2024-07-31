@@ -3,9 +3,10 @@ export interface PropChildren {
 }
 
 export interface UserCredentials {
-  username: string;
+  username?: string;
   email: string;
   password: string;
+  confirmPassword?: string;
 }
 export interface User {
   id?: string | null;
