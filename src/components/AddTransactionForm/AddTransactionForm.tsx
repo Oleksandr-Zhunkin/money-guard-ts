@@ -12,8 +12,7 @@ import { categoriesThunk } from "../../redux/categories/operations";
 import { selectCategories } from "../../redux/categories/selectors";
 import {
   Category,
-  onSubmitValuesProps,
-  TransactionType,
+  onSubmitValuesProps 
 } from "../../types/TransactionFormTypes";
 import { AppDispatch } from "../../redux/store";
 import { Transaction } from "../../types/types";

@@ -3,12 +3,13 @@ import { selectUserBalance } from "../../redux/auth/selectors";
 
 import s from "./Balance.module.scss";
 
-const Balance = () => {
+const Balance: React.FC = () => {
   const userBalance = useSelector(selectUserBalance);
 
-  const formattedBalance = userBalance
-    ?.toFixed(2)
-    .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  const formattedBalance =
+    userBalance !== undefined && userBalance !== null
+      ? userBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+      : "0.00";
 
   return (
     <div className={s.balanceContainer}>

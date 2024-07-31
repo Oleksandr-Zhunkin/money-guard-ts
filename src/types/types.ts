@@ -23,21 +23,19 @@ export interface UserState {
   isRefresh?: boolean;
   isError?: boolean;
 }
-export interface MonoState {
-  mono: object | string;
-  data_mono: number | null;
-}
 
-export interface Transaction {
+
+export type Transaction = {
   id?: string;
-  transactionDate: string | Date;
-  type: "INCOME" | "EXPENSE";
+  transactionDate: Date;  // Consistent use of Date type
+  type: "EXPENSE" | "INCOME";
   comment: string;
   amount: number;
   balanceAfter?: number;
   categoryId: string;
   userId?: string;
-}
+};
+
 export interface EditTransaction {
   id: string;
   data: {
@@ -71,4 +69,14 @@ export interface StatisticsTableProps {
     expenseSummary: number;
     incomeSummary: number;
   };
+}
+// types.ts
+export interface CurrencyData {
+  rateBuy: number;
+  rateSell: number;
+}
+
+export interface MonoState {
+  mono: CurrencyData[]; // Ensure this matches the expected type
+  data_mono: number | null;
 }
