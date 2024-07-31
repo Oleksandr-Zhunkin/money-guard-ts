@@ -53,26 +53,24 @@ export interface TransactionsState {
 }
 export interface PeriodDate {
   year: string | number | Date;
-  month?: string | null;
+  month?: string | number | null;
 }
 
-interface Category {
-  name: string;
-  total: number;
+export interface Category {
   type: "EXPENSE" | "INCOME";
+  total: number;
+  name: string;
 }
 
 export interface StatisticsTableProps {
-  category?: {
-    categoriesSummary: Category[];
-    expenseSummary: number;
-    incomeSummary: number;
-    month?: number | null;
-    periodTotal?: number;
-    year?: number | null;
-  };
+  categoriesSummary: Category[];
+  expenseSummary: number;
+  incomeSummary: number;
+  month?: number | null;
+  periodTotal?: number;
+  year?: number | null;
 }
-// types.ts
+
 export interface CurrencyData {
   rateBuy: number;
   rateSell: number;
