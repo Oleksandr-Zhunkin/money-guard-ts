@@ -153,3 +153,6 @@ ul {
   cursor: pointer;
   background: var(--background-btn);
 }
+.iconWrapper:hover .iconEdit {
+  stroke-opacity: 1;
+}
