@@ -1,11 +1,17 @@
 import Modal from "react-modal";
 import s from "./ModalWindow.module.scss";
 
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 Modal.setAppElement("#root");
 
-const ModalWindow = ({ children, isOpen, onClose }) => {
+interface PropModal {
+  children: ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const ModalWindow = ({ children, isOpen, onClose }: PropModal) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";

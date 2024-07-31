@@ -11,17 +11,14 @@ import Email from "../../components/Icons/EmailIcon";
 
 import { loginThunk } from "../../redux/auth/operations";
 import { loginFormSchema } from "../../schemas/validatorLogin";
-import { useAppDispatch } from "../../hooks/useDispatch";
 
-interface LoginFormValues {
-  email: string;
-  password: string;
-}
+import { AppDispatch } from "../../redux/store";
+import { UserCredentials } from "../../types/types";
 
-const LoginPage: React.FC = () => {
-  const dispatch = useAppDispatch();
+const LoginPage = () => {
+  const dispatch: AppDispatch = useDispatch();
 
-  const handleSubmit = (values: LoginFormValues) => {
+  const handleSubmit = (values: Omit<UserCredentials, "username">) => {
     dispatch(loginThunk(values));
   };
 

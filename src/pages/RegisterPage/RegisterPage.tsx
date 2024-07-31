@@ -13,19 +13,14 @@ import Password from "../../components/Icons/PasswordIcon";
 import { registerThunk } from "../../redux/auth/operations";
 import { registerFormSchema } from "../../schemas/validatorLogin";
 import { useState } from "react";
-import { useAppDispatch } from "../../hooks/useDispatch";
 
-interface RegisterFormValues {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { UserCredentials } from "../../types/types";
+import { AppDispatch } from "../../redux/store";
 
-const RegisterPage: React.FC = () => {
-  const [password, setPassword] = useState("");
-  const dispatch = useAppDispatch();
-  const handleSubmit = (values: RegisterFormValues) => {
+const RegisterPage = () => {
+  const [password, setPassword] = useState<string>("");
+  const dispatch: AppDispatch = useDispatch();
+  const handleSubmit = (values: UserCredentials) => {
     const credentials = {
       username: values.username,
       email: values.email,

@@ -1,4 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { TransactionsState } from "../../types/types";
 import {
   addTransactionsThunk,
   deleteTransactionsThunk,
@@ -7,21 +8,15 @@ import {
   getTransactionsThunk,
   updateTransactionsThunk,
 } from "./operations";
-import { TransactionType } from "../../types/TransactionFormTypes";
 
-export type StateType = {
-  transactions: TransactionType[];
-  periodTransaction: Date | null;
-  isError: Boolean;
-  isLoading: Boolean;
-};
 
-const initialState: StateType = {
+const initialState: TransactionsState = {
   transactions: [],
   periodTransaction: null,
-  isError: false,
-  isLoading: false,
+  isError: false, 
+  isLoading: false, 
 };
+
 
 const slice = createSlice({
   name: "transactions",
@@ -44,7 +39,7 @@ const slice = createSlice({
       })
       .addCase(deleteTransactionsThunk.fulfilled, (state, action) => {
         state.transactions = state.transactions.filter(
-          (transaction) => transaction.id !== action.meta.arg
+          (transaction) => transaction.id !== action.payload
         );
       })
       .addCase(fetchPeriodThunk.fulfilled, (state, action) => {
@@ -89,10 +84,11 @@ const slice = createSlice({
           fetchYearThunk.rejected
         ),
         (state, action) => {
-          state.isError = action.payload as boolean;
+          state.isError = action.payload || "An error occurred";
           state.isLoading = false;
         }
       );
   },
 });
+
 export const transactionsReducer = slice.reducer;

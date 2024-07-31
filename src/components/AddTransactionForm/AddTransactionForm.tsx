@@ -12,10 +12,10 @@ import { categoriesThunk } from "../../redux/categories/operations";
 import { selectCategories } from "../../redux/categories/selectors";
 import {
   Category,
-  onSubmitValuesProps,
-  TransactionType,
+  onSubmitValuesProps 
 } from "../../types/TransactionFormTypes";
 import { AppDispatch } from "../../redux/store";
+import { Transaction } from "../../types/types";
 
 let formSchema = Yup.object({
   sum: Yup.number().min(1).required(),
@@ -47,7 +47,7 @@ const AddTransactionForm = ({ onClose }: Prop) => {
       ? "063f1132-ba5d-42b4-951d-44011ca46262"
       : values.categoryId.value;
 
-    const data: TransactionType = {
+    const data: Transaction = {
       transactionDate: values.datepicker,
       type: isExpense ? "INCOME" : "EXPENSE",
       categoryId: category,

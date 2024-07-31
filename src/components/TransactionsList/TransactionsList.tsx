@@ -1,27 +1,26 @@
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-
 import s from "./TransactionsList.module.scss";
-
 import ModalWindow from "../ModalWindow/ModalWindow";
 import EditTransactionForm from "../EditTransactionForm/EditTransactionForm";
 import TransactionsItem from "../TransactionsItem/TransactionsItem";
 import Loader from "../Loader/Loader";
-
 import {
   selectIsLoading,
   selectTransactions,
 } from "../../redux/transactions/selectors";
 import useResponse from "../../hooks/useResponse";
+import { Transaction } from "../../types/types";
 
-const TransactionsList = () => {
+const TransactionsList: React.FC = () => {
   const transactions = useSelector(selectTransactions);
   const isLoading = useSelector(selectIsLoading);
   const { isMobile } = useResponse();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
 
-  const openModal = (transaction) => {
+  const openModal = (transaction: Transaction) => {
     setSelectedTransaction(transaction);
     setIsModalOpen(true);
   };
@@ -40,7 +39,9 @@ const TransactionsList = () => {
   }
 
   const sortedTransactions = [...transactions].sort(
-    (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
+    (a, b) =>
+      new Date(b.transactionDate).getTime() -
+      new Date(a.transactionDate).getTime()
   );
 
   return isLoading ? (
@@ -60,24 +61,22 @@ const TransactionsList = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedTransactions.map((transaction, index) => (
+            {sortedTransactions.map((transaction) => (
               <TransactionsItem
                 key={transaction.id}
                 transaction={transaction}
-                openModal={() => openModal(transaction)}
-                index={index + 1}
+                openModal={openModal}
               />
             ))}
           </tbody>
         </table>
       ) : (
         <ul className={s.listTrans}>
-          {sortedTransactions.map((transaction, index) => (
+          {sortedTransactions.map((transaction) => (
             <TransactionsItem
               key={transaction.id}
               transaction={transaction}
-              openModal={() => openModal(transaction)}
-              index={index + 1}
+              openModal={openModal}
             />
           ))}
         </ul>

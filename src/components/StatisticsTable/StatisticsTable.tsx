@@ -1,6 +1,11 @@
+import { StatisticsTableProps } from "../../types/types";
 import s from "./StatisticsTable.module.scss";
-
-export const StatisticsTable = ({ category }) => {
+interface StatisticDashboardProps {
+  category: StatisticsTableProps | null;
+}
+export const StatisticsTable: React.FC<StatisticDashboardProps> = ({
+  category,
+}) => {
   const color = [
     "#81e1ff",
     "#4a56e2",

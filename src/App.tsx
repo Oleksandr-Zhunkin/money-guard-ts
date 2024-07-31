@@ -21,9 +21,10 @@ import { refreshThunk } from "./redux/auth/operations";
 import { selectIsRefresh } from "./redux/auth/selectors";
 import useResponse from "./hooks/useResponse";
 import { categoriesThunk } from "./redux/categories/operations";
+import { AppDispatch } from "./redux/store";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefresh);
   const { isMobile } = useResponse();
 

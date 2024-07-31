@@ -18,6 +18,7 @@ const IconEdit = () => {
           strokeWidth="1.2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className={s.iconEdit}
         />
       </svg>
     </div>
