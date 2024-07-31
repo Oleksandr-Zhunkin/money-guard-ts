@@ -24,10 +24,9 @@ export interface UserState {
   isError?: boolean;
 }
 
-
 export type Transaction = {
   id?: string;
-  transactionDate: Date;  // Consistent use of Date type
+  transactionDate: Date; // Consistent use of Date type
   type: "EXPENSE" | "INCOME";
   comment: string;
   amount: number;
@@ -48,13 +47,13 @@ export interface EditTransaction {
 }
 export interface TransactionsState {
   transactions: Transaction[];
-  periodTransaction: null | Transaction[];
+  periodTransaction: StatisticsTableProps | null;
   isError: boolean | string;
   isLoading: boolean;
 }
 export interface PeriodDate {
-  year: string | number;
-  month?: string;
+  year: string | number | Date;
+  month?: string | null;
 }
 
 interface Category {
@@ -68,6 +67,9 @@ export interface StatisticsTableProps {
     categoriesSummary: Category[];
     expenseSummary: number;
     incomeSummary: number;
+    month?: number | null;
+    periodTotal?: number;
+    year?: number | null;
   };
 }
 // types.ts

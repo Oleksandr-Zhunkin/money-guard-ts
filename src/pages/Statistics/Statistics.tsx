@@ -8,16 +8,25 @@ import StatisticsTable from "../../components/StatisticsTable/StatisticsTable";
 
 import { useSelector } from "react-redux";
 import { selectPeriodTransaction } from "../../redux/transactions/selectors";
+import { StatisticsTableProps } from "../../types/types";
 
 const currentYear = getYear(new Date());
 const Statistics = () => {
-  const [selectedYear, setSelectedYear] = useState(currentYear);
-  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedYear, setSelectedYear] = useState<number | string | Date>(
+    currentYear
+  );
+  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const period = useSelector(selectPeriodTransaction);
-
+  const categoryData = period
+    ? {
+        categoriesSummary: [],
+        expenseSummary: 0,
+        incomeSummary: 0,
+      }
+    : undefined;
   return (
     <div className={s.box}>
-      <StatisticDashboard category={period} />
+      <StatisticDashboard category={categoryData} />
       <div>
         <StatisticDatePicker
           selectedYear={selectedYear}
@@ -26,7 +35,7 @@ const Statistics = () => {
           setSelectedMonth={setSelectedMonth}
           currentYear={currentYear}
         />
-        <StatisticsTable category={period} />
+        <StatisticsTable category={categoryData} />
       </div>
     </div>
   );
