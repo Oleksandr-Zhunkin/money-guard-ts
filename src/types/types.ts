@@ -26,7 +26,7 @@ export interface UserState {
 
 export type Transaction = {
   id?: string;
-  transactionDate: Date; // Consistent use of Date type
+  transactionDate: Date;
   type: "EXPENSE" | "INCOME";
   comment: string;
   amount: number;
@@ -53,32 +53,30 @@ export interface TransactionsState {
 }
 export interface PeriodDate {
   year: string | number | Date;
-  month?: string | null;
+  month?: string | number | null;
 }
 
-interface Category {
-  name: string;
-  total: number;
+export interface Category {
   type: "EXPENSE" | "INCOME";
+  total: number;
+  name: string;
 }
 
 export interface StatisticsTableProps {
-  category?: {
-    categoriesSummary: Category[];
-    expenseSummary: number;
-    incomeSummary: number;
-    month?: number | null;
-    periodTotal?: number;
-    year?: number | null;
-  };
+  categoriesSummary: Category[];
+  expenseSummary: number;
+  incomeSummary: number;
+  month?: number | null;
+  periodTotal?: number;
+  year?: number | null;
 }
-// types.ts
+
 export interface CurrencyData {
   rateBuy: number;
   rateSell: number;
 }
 
 export interface MonoState {
-  mono: CurrencyData[]; // Ensure this matches the expected type
+  mono: CurrencyData[];
   data_mono: number | null;
 }

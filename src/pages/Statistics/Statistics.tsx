@@ -16,17 +16,13 @@ const Statistics = () => {
     currentYear
   );
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
-  const period = useSelector(selectPeriodTransaction);
-  const categoryData = period
-    ? {
-        categoriesSummary: [],
-        expenseSummary: 0,
-        incomeSummary: 0,
-      }
-    : undefined;
+  const category: StatisticsTableProps | null = useSelector(
+    selectPeriodTransaction
+  );
+
   return (
     <div className={s.box}>
-      <StatisticDashboard category={categoryData} />
+      <StatisticDashboard category={category} />
       <div>
         <StatisticDatePicker
           selectedYear={selectedYear}
@@ -35,7 +31,7 @@ const Statistics = () => {
           setSelectedMonth={setSelectedMonth}
           currentYear={currentYear}
         />
-        <StatisticsTable category={categoryData} />
+        <StatisticsTable category={category} />
       </div>
     </div>
   );

@@ -8,8 +8,13 @@ import { selectUser } from "../../redux/auth/selectors";
 import { StatisticsTableProps } from "../../types/types";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+interface StatisticDashboardProps {
+  category: StatisticsTableProps | null;
+}
 
-const StatisticDashboard: React.FC<StatisticsTableProps> = ({ category }) => {
+const StatisticDashboard: React.FC<StatisticDashboardProps> = ({
+  category,
+}) => {
   const userBalance = useSelector(selectUser);
 
   const summary = category?.categoriesSummary
