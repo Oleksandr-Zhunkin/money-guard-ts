@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import s from "./Header.module.scss";
 import Logo from "../../images/icons/logo.svg";
-import exitIcon from "../../images/icons/exit-icon.svg";
+import IconExit from "../Icons/IconExit";
 
 import Logout from "../Logout/Logout";
 import Container from "../Container/Container";
@@ -44,7 +44,7 @@ const Header = () => {
                   className={s.exit_btn}
                   type="button"
                 >
-                  <img className={s.exit_icon} src={exitIcon} alt="exit" />
+                  <IconExit />
                   {isTablet && <p className={s.exit_text}>Exit</p>}
                 </button>
               </div>
