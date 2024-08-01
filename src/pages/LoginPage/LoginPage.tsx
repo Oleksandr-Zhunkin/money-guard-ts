@@ -1,3 +1,4 @@
+import React from "react";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,14 +14,14 @@ import { loginFormSchema } from "../../schemas/validatorLogin";
 import { AppDispatch } from "../../redux/store";
 import { UserCredentials } from "../../types/types";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const handleSubmit = (values: Omit<UserCredentials, "username">) => {
     dispatch(loginThunk(values));
   };
 
-  const initialValues = {
+  const initialValues: Omit<UserCredentials, "username"> = {
     email: "",
     password: "",
   };
