@@ -1,7 +1,12 @@
+import { FieldProps } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const CustomDatePicker = ({ field, form, ...props }) => {
+interface Prop extends FieldProps {
+  props: any[];
+}
+
+const CustomDatePicker = ({ field, form, ...props }: Prop) => {
   return (
     <DatePicker
       {...field}
