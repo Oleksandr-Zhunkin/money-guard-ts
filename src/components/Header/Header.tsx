@@ -17,7 +17,7 @@ const Header = () => {
   const user = useSelector(selectUser);
 
   const { isTablet } = useResponse();
-  const [modalIsOpen, setModalIsOpen] = useState<Boolean>(false);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const handleModalOpen = (): void => {
     setModalIsOpen(true);
