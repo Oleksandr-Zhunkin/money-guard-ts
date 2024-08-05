@@ -36,7 +36,7 @@ const EditTransactionForm = ({ transaction, onClose }: Prop) => {
       updateTransactionsThunk({
         id: transaction.id || "",
         data: {
-          transactionDate: values.datepicker.toISOString(),
+          transactionDate: values.datepicker.toString(),
           type: values.type,
           categoryId: values.categoryId.value,
           comment: values.comment,

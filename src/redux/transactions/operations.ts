@@ -35,6 +35,7 @@ export const addTransactionsThunk = createAsyncThunk<
   try {
     const { data } = await guardApi.post("/api/transactions", transaction);
     thunkApi.dispatch(getBalanceThunk());
+
     toast.success(`Transaction: "${data.comment}" is added`);
     return data;
   } catch (error) {
@@ -66,6 +67,7 @@ export const updateTransactionsThunk = createAsyncThunk<
     return thunkApi.rejectWithValue("Incorrect data");
   }
 });
+
 export const deleteTransactionsThunk = createAsyncThunk<
   string,
   string,
@@ -75,6 +77,7 @@ export const deleteTransactionsThunk = createAsyncThunk<
     const { data } = await guardApi.delete(`/api/transactions/${id}`);
 
     thunkApi.dispatch(getBalanceThunk());
+    thunkApi.dispatch(getTransactionsThunk());
 
     toast.success("Transaction is deleted");
 
