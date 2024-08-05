@@ -12,7 +12,7 @@ import { categoriesThunk } from "../../redux/categories/operations";
 import { selectCategories } from "../../redux/categories/selectors";
 import {
   Category,
-  onSubmitValuesProps 
+  onSubmitValuesProps,
 } from "../../types/TransactionFormTypes";
 import { AppDispatch } from "../../redux/store";
 import { Transaction } from "../../types/types";
@@ -35,7 +35,7 @@ type Prop = {
 
 const AddTransactionForm = ({ onClose }: Prop) => {
   const categories: Category[] = useSelector(selectCategories);
-  const [isExpense, setIsIncome] = useState(true);
+  const [isExpense, setIsIncome] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {

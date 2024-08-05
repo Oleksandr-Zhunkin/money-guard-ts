@@ -9,6 +9,7 @@ export type onSubmitValuesProps = {
   type: "EXPENSE" | "INCOME";
   categoryId: SelectOptionType;
   sum: number;
+  incomeExpense?: boolean;
   datepicker: Date;
   comment: string;
 };
