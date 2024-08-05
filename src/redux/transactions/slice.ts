@@ -9,14 +9,12 @@ import {
   updateTransactionsThunk,
 } from "./operations";
 
-
 const initialState: TransactionsState = {
   transactions: [],
   periodTransaction: null,
-  isError: false, 
-  isLoading: false, 
+  isError: false,
+  isLoading: false,
 };
-
 
 const slice = createSlice({
   name: "transactions",

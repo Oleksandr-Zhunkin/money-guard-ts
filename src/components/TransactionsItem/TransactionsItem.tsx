@@ -4,7 +4,6 @@ import IconEdit from "../Icons/IconEdit";
 import useResponse from "../../hooks/useResponse";
 import { selectCategories } from "../../redux/categories/selectors";
 import { deleteTransactionsThunk } from "../../redux/transactions/operations";
-import { getBalanceThunk } from "../../redux/auth/operations";
 import s from "./TransactionsItem.module.scss";
 import IconArrowUp from "../Icons/IconArrowUp";
 import { Transaction } from "../../types/types"; // Ensure correct import path
@@ -32,9 +31,7 @@ const TransactionsItem: React.FC<TransactionsItemProps> = ({
 
   const handleDeleteTransaction = () => {
     if (transaction.id) {
-      dispatch(deleteTransactionsThunk(transaction.id))
-        .unwrap()
-        .then(() => dispatch(getBalanceThunk()));
+      dispatch(deleteTransactionsThunk(transaction.id));
     }
   };
 
