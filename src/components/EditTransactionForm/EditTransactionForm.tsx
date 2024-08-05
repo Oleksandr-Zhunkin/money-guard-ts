@@ -8,10 +8,7 @@ import ExpenseTransaction from "../ExpenseTransaction/ExpenseTransaction";
 import { updateTransactionsThunk } from "../../redux/transactions/operations";
 import { selectCategories } from "../../redux/categories/selectors";
 import { getBalanceThunk } from "../../redux/auth/operations";
-import {
-  onSubmitValuesProps,
-  SelectOptionType,
-} from "../../types/TransactionFormTypes";
+import { onSubmitValuesProps } from "../../types/TransactionFormTypes";
 import { AppDispatch } from "../../redux/store";
 
 const formSchema = Yup.object({
@@ -37,10 +34,9 @@ const EditTransactionForm = ({ transaction, onClose }: Prop) => {
     onClose();
     dispatch(
       updateTransactionsThunk({
-        id: transaction.id || "", // Ensure id is always a string
+        id: transaction.id || "",
         data: {
           transactionDate: values.datepicker.toISOString(),
-          string,
           type: values.type,
           categoryId: values.categoryId.value,
           comment: values.comment,
